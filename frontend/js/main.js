@@ -4,9 +4,14 @@
 // English & Hinglish Clean Presentation
 // ============================================================
 
-const API_BASE = window.location.origin && window.location.origin.startsWith('http') 
-  ? `${window.location.origin}/api` 
-  : 'http://localhost:5000/api';
+// Live Render backend URL for Hostinger / production
+const LIVE_BACKEND_URL = 'https://satta-takht.onrender.com';
+
+const API_BASE = (window.location.origin && window.location.origin.includes('onrender.com'))
+  ? `${window.location.origin}/api`
+  : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? `${window.location.origin}/api`
+    : `${LIVE_BACKEND_URL}/api`;
 
 // PWA Install prompt or Custom APK / Play Store Link handling
 let deferredPrompt;
