@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Admin Panel — Satta Takht</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #FF8C00; --gold: #FFD700;
+      --dark: #0d0d0d; --dark2: #1a1a2e; --dark3: #222;
+      --green: #00c853; --red: #ff1744;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--dark); color: #fff; font-size: 15px; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ---- TOP BAR ---- */
+    .topbar {
+      background: linear-gradient(90deg, #1a0800, #3d1500);
+      border-bottom: 3px solid var(--orange);
+      padding: 12px 14px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .topbar-brand { display: flex; flex-direction: column; }
+    .topbar-brand .title { color: var(--gold); font-size: 1rem; font-weight: 800; letter-spacing: 1px; }
+    .topbar-brand .by    { color: var(--orange); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600; }
+    .topbar-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .btn-sm {
+      padding: 7px 12px; border-radius: 20px; font-size: 0.75rem;
+      font-weight: 700; border: none; cursor: pointer; white-space: nowrap;
+    }
+    .btn-view    { background: rgba(255,140,0,.2); border: 1px solid var(--orange); color: #fff; }
+    .btn-scrape  { background: linear-gradient(135deg, #00c853, #00843d); color: #fff; }
+    .btn-cities  { background: linear-gradient(135deg, #7c4dff, #512da8); color: #fff; }
+    .btn-logout  { background: rgba(255,23,68,.2); border: 1px solid var(--red); color: #ff6b6b; }
+
+    /* ---- MAIN CONTENT ---- */
+    .main { padding: 12px; max-width: 700px; margin: 0 auto; }
+
+    /* ---- ALERT ---- */
+    .alert {
+      border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;
+      font-size: 0.88rem; font-weight: 600;
+    }
+    .alert-success { background: rgba(0,200,83,.12); border: 1px solid var(--green); color: #69f0ae; }
+    .alert-error   { background: rgba(255,23,68,.12); border: 1px solid var(--red);   color: #ff6b6b; }
+
+    /* ---- CARD ---- */
+    .card {
+      background: var(--dark2); border: 1px solid #2a2a2a;
+      border-radius: 14px; padding: 16px; margin-bottom: 16px;
+    }
+    .card-title {
+      color: var(--orange); font-size: 0.88rem; font-weight: 700;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid #2a2a2a; letter-spacing: 1px;
+    }
+
+    /* ---- FORM ---- */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { color: #888; font-size: 0.72rem; letter-spacing: 1px; }
+    select, input[type="text"], input[type="date"] {
+      width: 100%; padding: 11px 12px;
+      background: var(--dark); border: 1.5px solid #2a2a2a;
+      border-radius: 9px; color: #fff; font-size: 0.95rem; outline: none;
+      transition: border 0.2s; -webkit-appearance: none;
+    }
+    select:focus, input:focus { border-color: var(--orange); }
+    select option { background: #1a1a2e; }
+    .btn-save {
+      width: 100%; padding: 13px;
+      background: linear-gradient(135deg, var(--orange), #cc6600);
+      color: #000; font-weight: 800; border: none;
+      border-radius: 10px; cursor: pointer; font-size: 0.95rem;
+      letter-spacing: 1px; margin-top: 4px;
+    }
+    .btn-save:active { opacity: 0.8; }
+
+    /* ---- RESULTS TABLE (mobile-scroll) ---- */
+    .table-wrap { overflow-x: auto; border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; min-width: 360px; }
+    thead tr { background: linear-gradient(90deg, var(--orange), #cc6600); }
+    th { padding: 9px 8px; color: #000; font-weight: 700; text-align: center; font-size: 0.72rem; letter-spacing: 1px; }
+    td { padding: 8px 8px; text-align: center; border-bottom: 1px solid #1e1e1e; }
+    tr:hover td { background: rgba(255,140,0,.05); }
+    .city-cell { color: var(--orange); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; }
+    .num-cell  { color: var(--green);  font-weight: 800; font-size: 1rem; }
+    .date-cell { color: #aaa; font-size: 0.72rem; }
+    .time-cell { color: #444; font-size: 0.68rem; }
+
+    /* ---- FOOTER ---- */
+    .footer-brand {
+      text-align: center; padding: 20px 10px;
+      color: #333; font-size: 0.72rem; letter-spacing: 2px;
+    }
+    .footer-brand span { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="title">👑 SATTA TAKHT</div>
+      <div class="by">BY SAURAV</div>
+    </div>
+    <div class="topbar-actions">
+      <a href="/" target="_blank" class="btn-sm btn-view">🌐 Site</a>
+      <form method="POST" action="/admin/scrape-now" style="margin:0">
+        <button class="btn-sm btn-scrape">⚡ Scrape</button>
+      </form>
+      <a href="/admin/cities" class="btn-sm btn-cities">🏙️ Cities</a>
+      <a href="/admin/khaiwals" class="btn-sm" style="background:linear-gradient(135deg, #e65100, #bf360c); color:#fff;">🎲 Khaiwals</a>
+      <a href="/admin/settings" class="btn-sm" style="background:linear-gradient(135deg, #0288d1, #01579b); color:#fff;">💬 Chatbot</a>
+      <a href="/admin/logout" class="btn-sm btn-logout">Exit</a>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  {% if message %}
+  <div class="alert {{ 'alert-success' if '✅' in message else 'alert-error' }}">{{ message }}</div>
+  {% endif %}
+
+  {% set url_msg = request.args.get('msg', '') %}
+  {% if url_msg %}
+  <div class="alert alert-success">{{ url_msg }}</div>
+  {% endif %}
+
+  <!-- MANUAL ENTRY FORM -->
+  <div class="card">
+    <div class="card-title">✍️ Manual Result Entry</div>
+    <form method="POST">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>DATE</label>
+          <input type="date" name="result_date" value="{{ today }}" required/>
+        </div>
+        <div class="form-group">
+          <label>CITY</label>
+          <select name="city" required>
+            {% for city in cities %}
+            <option value="{{ city['city_key'] }}">{{ city['display_name'] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>RESULT NUMBER (00–99)</label>
+          <input type="text" name="number" placeholder="e.g. 45" maxlength="3" inputmode="numeric" pattern="[0-9]*" required/>
+        </div>
+      </div>
+      <button type="submit" class="btn-save">💾 SAVE RESULT</button>
+    </form>
+  </div>
+
+  <!-- RECENT RESULTS -->
+  <div class="card">
+    <div class="card-title">📋 Recent Results (Last 50)</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>DATE</th><th>CITY</th><th>RESULT</th><th>UPDATED</th></tr>
+        </thead>
+        <tbody>
+          {% for row in recent %}
+          <tr>
+            <td class="date-cell">{{ row['result_date'] }}</td>
+            <td class="city-cell">{{ row['display_name'] or row['city_key'].replace('_',' ') }}</td>
+            <td class="num-cell">{{ row['result_number'] or '—' }}</td>
+            <td class="time-cell">{{ row['updated_at'][11:16] if row['updated_at'] else '—' }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="4" style="color:#444;padding:20px">No results yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-brand">SATTA TAKHT &nbsp;•&nbsp; <span>BY SAURAV</span></div>
+
+</body>
+</html>

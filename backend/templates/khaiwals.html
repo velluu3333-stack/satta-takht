@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Khaiwal Boards — Satta Takht</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #FF8C00; --gold: #FFD700;
+      --dark: #0d0d0d; --dark2: #1a1a2e;
+      --green: #00c853; --red: #ff1744; --purple: #7c4dff;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--dark); color: #fff; padding-bottom: 30px; }
+
+    /* ---- TOPBAR ---- */
+    .topbar {
+      background: linear-gradient(90deg, #1a0800, #3d1500);
+      border-bottom: 3px solid var(--orange);
+      padding: 12px 14px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .topbar-brand .title { color: var(--gold); font-size: 1rem; font-weight: 800; }
+    .topbar-brand .sub   { color: var(--orange); font-size: 0.65rem; letter-spacing: 3px; }
+    .btn-sm {
+      padding: 7px 14px; border-radius: 20px; font-size: 0.75rem;
+      font-weight: 700; border: none; cursor: pointer; white-space: nowrap; text-decoration: none;
+      display: inline-block;
+    }
+    .btn-back { background: rgba(255,140,0,.2); border: 1px solid var(--orange); color: var(--orange); }
+
+    /* ---- MAIN ---- */
+    .main { padding: 12px; max-width: 720px; margin: 0 auto; }
+
+    .alert {
+      border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;
+      font-size: 0.88rem; font-weight: 600;
+    }
+    .alert-success { background: rgba(0,200,83,.12); border: 1px solid var(--green); color: #69f0ae; }
+
+    .board-card {
+      background: var(--dark2); border: 1.5px solid #333;
+      border-radius: 14px; padding: 18px 16px; margin-bottom: 18px;
+      position: relative;
+    }
+    .board-card.active { border-color: var(--orange); }
+    .board-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 14px; border-bottom: 1px solid #2a2a2a; padding-bottom: 10px;
+    }
+    .board-title { font-size: 1rem; font-weight: 800; color: var(--gold); }
+    .board-status {
+      padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 800;
+    }
+    .status-on  { background: rgba(0,200,83,0.2); color: var(--green); border: 1px solid var(--green); }
+    .status-off { background: rgba(255,23,68,0.2); color: var(--red); border: 1px solid var(--red); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { color: #888; font-size: 0.72rem; letter-spacing: 1px; font-weight: 600; }
+    input[type="text"] {
+      width: 100%; padding: 10px 12px;
+      background: var(--dark); border: 1.5px solid #2a2a2a;
+      border-radius: 8px; color: #fff; font-size: 0.88rem; outline: none;
+      transition: border 0.2s;
+    }
+    input:focus { border-color: var(--orange); }
+
+    .checkbox-row {
+      display: flex; align-items: center; gap: 8px; margin: 8px 0;
+      color: #ddd; font-size: 0.82rem; font-weight: 600;
+    }
+    .checkbox-row input { width: 18px; height: 18px; accent-color: var(--orange); cursor: pointer; }
+
+    .btn-save-board {
+      width: 100%; padding: 12px; margin-top: 6px;
+      background: linear-gradient(135deg, var(--orange), #cc6600);
+      color: #000; font-weight: 800; border: none;
+      border-radius: 8px; cursor: pointer; font-size: 0.9rem; letter-spacing: 1px;
+    }
+
+    .footer-brand { text-align: center; padding: 20px 10px; color: #444; font-size: 0.72rem; letter-spacing: 2px; }
+    .footer-brand span { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="title">🎲 4 KHAIWAL BOARDS</div>
+      <div class="sub">SATTA TAKHT · BY SAURAV</div>
+    </div>
+    <a href="/admin/panel" class="btn-sm btn-back">← Back</a>
+  </div>
+</div>
+
+<div class="main">
+
+  {% if msg %}
+  <div class="alert alert-success">{{ msg }}</div>
+  {% endif %}
+
+  <div style="background:rgba(255,140,0,0.1); border:1px solid var(--orange); border-radius:10px; padding:12px; margin-bottom:16px; font-size:0.8rem; line-height:1.5;">
+    💡 <strong>Info:</strong> Website par 4 Khaiwal Boards display hote hain. Yahan se tu unke Naam, Rates, Timings, aur WhatsApp number change kar sakta hai!
+  </div>
+
+  {% for b in khaiwals %}
+  <div class="board-card {{ 'active' if b['is_active'] }}">
+    <div class="board-header">
+      <span class="board-title">BOARD #{{ b['id'] }} — {{ b['name'] }}</span>
+      <span class="board-status {{ 'status-on' if b['is_active'] else 'status-off' }}">
+        {{ 'ACTIVE ON SITE' if b['is_active'] else 'HIDDEN' }}
+      </span>
+    </div>
+
+    <form method="POST" action="/admin/khaiwals">
+      <input type="hidden" name="id" value="{{ b['id'] }}"/>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label>KHAIWAL NAME *</label>
+          <input type="text" name="name" value="{{ b['name'] }}" required/>
+        </div>
+        <div class="form-group">
+          <label>BADGE / TITLE</label>
+          <input type="text" name="badge" value="{{ b['badge'] }}" placeholder="e.g. 🔥 NO. 1 TRUSTED"/>
+        </div>
+        <div class="form-group full">
+          <label>TAGLINE / GUARANTEE</label>
+          <input type="text" name="tagline" value="{{ b['tagline'] }}" placeholder="e.g. ईमानदार खाईवाल • 100% पेमेंट की गारंटी"/>
+        </div>
+        <div class="form-group">
+          <label>JODI RATE</label>
+          <input type="text" name="rate_jodi" value="{{ b['rate_jodi'] }}" placeholder="10 ke 950"/>
+        </div>
+        <div class="form-group">
+          <label>HARUF RATE</label>
+          <input type="text" name="rate_haruf" value="{{ b['rate_haruf'] }}" placeholder="100 ke 950"/>
+        </div>
+        <div class="form-group full">
+          <label>GAME TIMINGS (LIST)</label>
+          <input type="text" name="timings" value="{{ b['timings'] }}" placeholder="दिल्ली बाजार 03:00 PM | फरीदाबाद 06:00 PM | ..."/>
+        </div>
+        <div class="form-group full">
+          <label>WHATSAPP NUMBER (with 91, e.g. 919876543210)</label>
+          <input type="text" name="whatsapp" value="{{ b['whatsapp'] }}" placeholder="919876543210"/>
+        </div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="act_{{ b['id'] }}" name="is_active" value="1" {{ 'checked' if b['is_active'] }} />
+        <label for="act_{{ b['id'] }}" style="color:#fff; cursor:pointer;">Show this board on Website</label>
+      </div>
+
+      <button type="submit" class="btn-save-board">💾 UPDATE BOARD #{{ b['id'] }}</button>
+    </form>
+  </div>
+  {% endfor %}
+
+</div>
+
+<div class="footer-brand">SATTA TAKHT &nbsp;•&nbsp; <span>BY SAURAV</span></div>
+
+</body>
+</html>

@@ -1,0 +1,848 @@
+/* ============================================================
+   SATTA TAKHT — MOBILE-FIRST ADDICTIVE STYLING (BY SAURAV)
+   Color Palette: Deep Obsidian, Royal Gold, Vibrant Neon Amber
+   Clean, Instant Recognizable, High Contrast, Ultra-fast
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --gold: #FFD700;
+  --amber: #FF8C00;
+  --amber-dark: #cc6600;
+  --bg-dark: #0a0a0c;
+  --bg-card: #141419;
+  --bg-card-alt: #1a1a22;
+  --border-subtle: #242430;
+  --text-white: #ffffff;
+  --text-muted: #9e9ea8;
+  --green-live: #00e676;
+  --red-hot: #ff1744;
+  --blue-tg: #0088cc;
+  --green-wa: #25D366;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  min-height: 100vh;
+  line-height: 1.4;
+  overflow-x: hidden;
+  padding-bottom: 70px; /* Space for mobile floating buttons */
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ===== 1. TOP TICKER MARQUEE ===== */
+.top-marquee {
+  background: linear-gradient(90deg, #b71c1c, #d32f2f, #b71c1c);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 24s linear infinite;
+  letter-spacing: 0.5px;
+}
+
+@keyframes marquee {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+/* ===== 2. HEADER NAVBAR ===== */
+.site-header {
+  background: linear-gradient(180deg, #181105 0%, #0d0c0a 100%);
+  border-bottom: 2px solid var(--amber);
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-crown-img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(255, 23, 68, 0.9));
+}
+
+.brand-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-shadow: 0 0 14px rgba(255, 215, 0, 0.4);
+}
+
+.brand-subtitle {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 1.5px;
+  display: block;
+}
+
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 230, 118, 0.15);
+  border: 1px solid var(--green-live);
+  color: var(--green-live);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green-live);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green-live);
+  animation: pulse-glow 1.2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ===== 2.1 APP DOWNLOAD APK BAR (COMPACT & SLEEK) ===== */
+.app-download-bar {
+  background: linear-gradient(90deg, #161e27, #212f3d);
+  border: 1px solid #2c3e50;
+  border-left: 3px solid var(--green-live);
+  border-radius: 8px;
+  padding: 5px 10px;
+  max-width: 540px;
+  width: calc(100% - 24px);
+  margin: 6px auto 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+}
+
+.app-download-bar:active {
+  transform: scale(0.98);
+}
+
+.app-download-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-icon {
+  font-size: 1.25rem;
+}
+
+.app-download-left strong {
+  display: block;
+  font-size: 0.76rem;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.app-download-left small {
+  display: block;
+  font-size: 0.62rem;
+  color: #95a5a6;
+  line-height: 1.2;
+}
+
+.btn-download-app {
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.68rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0, 200, 83, 0.35);
+}
+
+/* ===== 3. STATS BAR (USERS ONLINE + DATE) ===== */
+.stats-bar {
+  background: #111115;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 7px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  color: #c7c7d1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.stat-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--green-live);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.stat-clock {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ===== 4. DISCLAIMER ===== */
+.disclaimer-banner {
+  background: rgba(255, 140, 0, 0.08);
+  border-left: 3px solid var(--amber);
+  border-right: 3px solid var(--amber);
+  color: #b5b5be;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  padding: 8px 12px;
+  text-align: center;
+  max-width: 600px;
+  margin: 8px auto;
+}
+
+/* ===== 5. HERO HIGHLIGHT RESULT CARD ===== */
+.live-hero-card {
+  max-width: 600px;
+  margin: 10px auto;
+  padding: 16px;
+  background: radial-gradient(circle at center, #241400 0%, #140d04 100%);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.live-hero-tag {
+  display: inline-block;
+  background: linear-gradient(90deg, #d32f2f, #ff1744);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.live-hero-city {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.live-hero-time {
+  font-size: 0.78rem;
+  color: #ccc;
+  margin-bottom: 4px;
+}
+
+.live-hero-num {
+  font-family: 'Teko', sans-serif;
+  font-size: 5rem;
+  line-height: 0.95;
+  font-weight: 700;
+  color: var(--text-white);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  letter-spacing: 2px;
+  margin: 4px 0;
+}
+
+.live-hero-num.live-val {
+  color: var(--green-live);
+  text-shadow: 0 0 20px rgba(0, 230, 118, 0.6);
+  animation: pulse-glow 1.8s infinite;
+}
+
+.live-hero-wait {
+  color: #ffab40;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ===== 6. ACTION BAR WITH VIBRANT POP-OUT & NEON AMBIENT EFFECT ===== */
+.action-bar {
+  max-width: 600px;
+  margin: 14px auto 10px;
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-action-refresh, .btn-action-khaiwal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 10px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Vibrant Amber-Orange Pop-Out Button */
+.btn-action-refresh {
+  background: linear-gradient(135deg, #ffab00 0%, #ff6d00 100%);
+  color: #000;
+  border: 1.5px solid #ffd54f;
+  box-shadow: 0 0 18px rgba(255, 171, 0, 0.7), 0 4px 15px rgba(0, 0, 0, 0.4);
+  animation: pop-pulse-refresh 2s infinite ease-in-out;
+}
+
+/* Royal Crimson-Gold Pop-Out Khaiwal Button */
+.btn-action-khaiwal {
+  background: linear-gradient(135deg, #b71c1c 0%, #7f0000 100%);
+  border: 1.5px solid #ffd700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  box-shadow: 0 0 18px rgba(255, 23, 68, 0.65), 0 4px 15px rgba(0, 0, 0, 0.4);
+  animation: pop-pulse-khaiwal 2s infinite ease-in-out;
+}
+
+@keyframes pop-pulse-refresh {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 14px rgba(255, 171, 0, 0.6), 0 0 28px rgba(255, 109, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(255, 171, 0, 0.95), 0 0 40px rgba(255, 109, 0, 0.6);
+  }
+}
+
+@keyframes pop-pulse-khaiwal {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 14px rgba(255, 23, 68, 0.55), 0 0 26px rgba(218, 165, 32, 0.3);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 26px rgba(255, 23, 68, 0.95), 0 0 42px rgba(255, 215, 0, 0.6);
+  }
+}
+
+.btn-action-refresh:active, .btn-action-khaiwal:active {
+  transform: scale(0.96) !important;
+}
+
+/* ===== 7. MAIN CONTAINER & SECTION HEADINGS ===== */
+.main-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px 12px;
+}
+
+.section-heading {
+  background: linear-gradient(90deg, #241400, #140d04);
+  border-left: 4px solid var(--amber);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 16px 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.heading-title {
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 0.86rem;
+  letter-spacing: 0.5px;
+}
+
+.heading-sub {
+  color: #888;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+/* ===== 8. RESULTS GRID (CLEAN, ADDICTIVE 2-COL CARDS) ===== */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.result-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--amber);
+}
+
+.result-card.card-featured {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: linear-gradient(180deg, #18141f 0%, #121017 100%);
+}
+
+.result-card.card-featured::before {
+  background: var(--gold);
+}
+
+.card-city {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.card-time {
+  font-size: 0.65rem;
+  color: #888894;
+  margin: 2px 0 6px;
+  font-weight: 600;
+}
+
+.card-num {
+  font-family: 'Teko', sans-serif;
+  font-size: 3.4rem;
+  line-height: 0.9;
+  font-weight: 700;
+  color: #fff;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-num.pending {
+  color: #4a4a58;
+  font-size: 2.2rem;
+}
+
+.card-num.live {
+  color: var(--green-live);
+  text-shadow: 0 0 14px rgba(0, 230, 118, 0.6);
+  animation: pulse-glow 1.5s infinite;
+}
+
+.card-status-text {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #6c6c78;
+  margin-top: 4px;
+}
+
+.card-status-text.live-text {
+  color: var(--green-live);
+}
+
+/* Spinner */
+.loading-placeholder {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px 10px;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255, 140, 0, 0.2);
+  border-top-color: var(--amber);
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== 9. 4 KHAIWAL BOARDS SECTION ===== */
+.khaiwal-section {
+  margin: 24px 0 16px;
+}
+
+.khaiwal-main-title {
+  background: linear-gradient(90deg, #d32f2f, #b71c1c);
+  border-radius: 12px;
+  padding: 12px 10px;
+  text-align: center;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+}
+
+.khaiwal-main-title span {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.khaiwal-main-title small {
+  display: block;
+  font-size: 0.68rem;
+  color: #ffcdd2;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.khaiwal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.khaiwal-board-card {
+  background: #141319;
+  border: 1.5px solid #2d2618;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.khaiwal-badge {
+  display: inline-block;
+  background: var(--amber);
+  color: #000;
+  font-size: 0.64rem;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.khaiwal-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.khaiwal-tagline {
+  font-size: 0.72rem;
+  color: #a8a8b4;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.khaiwal-rates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #0d0c10;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #22202c;
+  margin-bottom: 10px;
+}
+
+.rate-box {
+  text-align: center;
+}
+
+.rate-box .rate-label {
+  font-size: 0.62rem;
+  color: #888;
+  font-weight: 700;
+}
+
+.rate-box .rate-value {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--green-live);
+}
+
+.khaiwal-timings {
+  font-size: 0.68rem;
+  color: #c7c7d0;
+  line-height: 1.4;
+  padding: 6px 8px;
+  background: rgba(255, 140, 0, 0.05);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.khaiwal-actions {
+  display: block;
+}
+
+.btn-khaiwal-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+  transition: transform 0.15s;
+}
+
+.btn-khaiwal-wa:active {
+  transform: scale(0.98);
+}
+
+/* ===== 10. RECORD CHART TABLE ===== */
+.chart-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+}
+
+.chart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  min-width: 520px;
+}
+
+.chart-table thead tr {
+  background: linear-gradient(90deg, var(--amber), var(--amber-dark));
+  color: #000;
+}
+
+.chart-table th {
+  padding: 9px 8px;
+  font-weight: 800;
+  font-size: 0.7rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.chart-table td {
+  padding: 7px 8px;
+  text-align: center;
+  border-bottom: 1px solid #1a1a24;
+  color: #d1d1dc;
+}
+
+.chart-table td:first-child {
+  background: rgba(255, 140, 0, 0.08);
+  color: var(--amber);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.chart-table td.num {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.chart-table td.empty {
+  color: #3e3e4a;
+}
+
+/* ===== 11. TELEGRAM & WHATSAPP COMMUNITY CARDS ===== */
+.community-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 10px;
+}
+
+.community-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.tg-card { border: 1.5px solid rgba(0, 136, 204, 0.5); }
+.wa-card { border: 1.5px solid rgba(37, 211, 102, 0.5); }
+
+.comm-icon {
+  font-size: 1.8rem;
+}
+
+.comm-info {
+  flex: 1;
+}
+
+.comm-info h3 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.comm-info p {
+  font-size: 0.68rem;
+  color: #888;
+}
+
+.comm-btn {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.tg-btn { background: var(--blue-tg); color: #fff; }
+.wa-btn { background: var(--green-wa); color: #fff; }
+
+/* ===== 12. FOOTER ===== */
+.site-footer {
+  text-align: center;
+  padding: 24px 16px 30px;
+  background: #060608;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 24px;
+}
+
+.footer-brand {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.footer-by {
+  font-size: 0.72rem;
+  color: #666;
+  letter-spacing: 2px;
+  margin: 4px 0 10px;
+  font-weight: 600;
+}
+
+.footer-by span {
+  color: var(--amber);
+  font-weight: 800;
+}
+
+.footer-note {
+  font-size: 0.65rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ===== 13. FLOATING ACTION BUTTONS (LEFT: TG, RIGHT: REFRESH + WA) ===== */
+.floating-left {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 999;
+}
+
+.floating-right {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
+
+.fab-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.fab-btn:active {
+  transform: scale(0.9);
+}
+
+.fab-refresh {
+  background: linear-gradient(135deg, var(--amber), #cc6600);
+  font-size: 1.35rem;
+  color: #000;
+}
+
+.fab-tg {
+  background: var(--blue-tg);
+}
+
+.fab-wa {
+  background: var(--green-wa);
+}
