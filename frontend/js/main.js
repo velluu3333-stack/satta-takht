@@ -97,31 +97,69 @@ async function loadAllData() {
   }
 }
 
-// Apply Dynamic Telegram & WhatsApp Links across Website
+// Global settings cache
+let currentSettings = {};
+
+// Apply Dynamic Telegram & WhatsApp Links, Themes, and Leak Jodi across Website
 function applySiteSettings(settings) {
   if (!settings) return;
-  const tgLink = settings.telegram_link || 'https://t.me/';
-  const waNum  = settings.whatsapp_number || '919999999999';
-  const waLink = `https://wa.me/${waNum}?text=Hello%20Satta%20Takht`;
-  
-  // Custom APK or Play Store link
+  currentSettings = settings;
+
+  // 1. Separate Chatbot Links (Floating Bottom Buttons)
+  const cbTgLink = settings.chatbot_telegram || settings.telegram_link || 'https://t.me/';
+  const cbWaNum  = settings.chatbot_whatsapp || settings.whatsapp_number || '919999999999';
+  const cbWaLink = `https://wa.me/${cbWaNum}?text=Hello%20Satta%20Takht%20Chatbot`;
+
+  const fabTg = document.querySelector('.fab-tg');
+  if (fabTg) fabTg.href = cbTgLink;
+
+  const fabWa = document.querySelector('.fab-wa');
+  if (fabWa) fabWa.href = cbWaLink;
+
+  // 2. Separate Support Helpline & Community Links (Cards at bottom)
+  const spTgLink = settings.support_telegram || settings.telegram_link || 'https://t.me/';
+  const spWaNum  = settings.support_whatsapp || settings.whatsapp_number || '919999999999';
+  const spWaLink = `https://wa.me/${spWaNum}?text=Hello%20Satta%20Takht%20Support`;
+
+  const commTg = document.querySelector('.tg-btn');
+  if (commTg) commTg.href = spTgLink;
+
+  const commWa = document.querySelector('.wa-btn');
+  if (commWa) commWa.href = spWaLink;
+
+  // 3. Custom APK or Play Store link
   customAppLink = settings.app_download_link || '';
 
-  // 1. Floating Telegram
-  const fabTg = document.querySelector('.fab-tg');
-  if (fabTg) fabTg.href = tgLink;
+  // 4. Site-Wide Theme Switcher
+  const theme = settings.site_theme || 'theme-classic-dark';
+  document.body.className = theme;
 
-  // 2. Floating WhatsApp
-  const fabWa = document.querySelector('.fab-wa');
-  if (fabWa) fabWa.href = waLink;
+  // 5. VIP Leak Jodi Board (Below APK Box)
+  const leakSection = document.getElementById('leak-jodi-section');
+  if (leakSection) {
+    if (settings.leak_jodi_active === '1' || settings.leak_jodi_active === undefined) {
+      leakSection.style.display = 'block';
+      const titleEl = document.getElementById('leak-title');
+      const tagEl   = document.getElementById('leak-tagline');
+      const gamesEl = document.getElementById('leak-games');
+      const noteEl  = document.getElementById('leak-note');
+      const btnWa   = document.getElementById('leak-btn-wa');
+      const btnTg   = document.getElementById('leak-btn-tg');
 
-  // 3. Bottom Community TG Button
-  const commTg = document.querySelector('.tg-btn');
-  if (commTg) commTg.href = tgLink;
+      if (titleEl && settings.leak_jodi_title) titleEl.textContent = settings.leak_jodi_title;
+      if (tagEl && settings.leak_jodi_tagline) tagEl.textContent = settings.leak_jodi_tagline;
+      if (gamesEl && settings.leak_jodi_games) gamesEl.textContent = settings.leak_jodi_games;
+      if (noteEl && settings.leak_jodi_note) noteEl.textContent = settings.leak_jodi_note;
 
-  // 4. Bottom Community WA Button
-  const commWa = document.querySelector('.wa-btn');
-  if (commWa) commWa.href = waLink;
+      const leakWa = settings.leak_jodi_whatsapp || '919999999999';
+      if (btnWa) btnWa.href = `https://wa.me/${leakWa}?text=Hello%20Mujhe%20VIP%20Leak%20Jodi%20Chahiye`;
+
+      const leakTg = settings.leak_jodi_telegram || 'https://t.me/';
+      if (btnTg) btnTg.href = leakTg;
+    } else {
+      leakSection.style.display = 'none';
+    }
+  }
 }
 
 // 1. Render Top Hero Highlight (Desawar or First Live Result)
@@ -180,7 +218,7 @@ function renderResultsGrid(cities, results) {
   });
 }
 
-// 3. Render 4 Khaiwal Boards (English / Hinglish)
+// 3. Render Khaiwal Boards (Redesigned with Dual WhatsApp + Telegram & Dynamic Themes)
 function renderKhaiwalBoards(khaiwals) {
   const container = document.getElementById('khaiwal-container');
   if (!container) return;
@@ -193,28 +231,70 @@ function renderKhaiwalBoards(khaiwals) {
 
   khaiwals.forEach(b => {
     const card = document.createElement('div');
-    card.className = 'khaiwal-board-card';
+    const themeClass = b.board_theme || 'theme-blue';
+    card.className = `khaiwal-board-card ${themeClass}`;
+
+    // Format timings cleanly if separated by pipe |
+    let timingsHtml = '';
+    if (b.timings && b.timings.trim()) {
+      const parts = b.timings.split('|').map(s => s.trim()).filter(Boolean);
+      if (parts.length > 1) {
+        timingsHtml = `<div class="khaiwal-timing-grid">` +
+          parts.map(p => `<div class="timing-chip"><span class="check-icon">✅</span> ${p}</div>`).join('') +
+          `</div>`;
+      } else {
+        timingsHtml = `<div class="khaiwal-timings-line">⏰ ${b.timings}</div>`;
+      }
+    }
+
+    const waNum = b.whatsapp || '919999999999';
+    const waUrl = `https://wa.me/${waNum}?text=Hello%20${encodeURIComponent(b.name || 'Khaiwal')}%20bhai`;
+    const tgUrl = (b.telegram && b.telegram.trim()) 
+      ? (b.telegram.startsWith('http') ? b.telegram : `https://t.me/${b.telegram.replace('@', '')}`)
+      : (currentSettings.support_telegram || 'https://t.me/');
+
     card.innerHTML = `
-      ${b.badge ? `<span class="khaiwal-badge">${b.badge}</span>` : ''}
-      <div class="khaiwal-name">${b.name}</div>
-      <div class="khaiwal-tagline">${b.tagline || ''}</div>
+      <div class="khaiwal-header">
+        ${b.badge ? `<span class="khaiwal-badge">${b.badge}</span>` : ''}
+        <h3 class="khaiwal-name">[ ✅ ${b.name} ✅ ]</h3>
+        ${b.tagline ? `<p class="khaiwal-tagline">${b.tagline}</p>` : ''}
+      </div>
 
       <div class="khaiwal-rates">
-        <div class="rate-box">
-          <div class="rate-label">🎯 JODI RATE</div>
-          <div class="rate-value">${b.rate_jodi || '10 ka 950'}</div>
+        <div class="rate-box jodi-box">
+          <div class="rate-label">🎯 जोड़ी रेट</div>
+          <div class="rate-value">➔ ${b.rate_jodi || '10 का 950'}</div>
         </div>
-        <div class="rate-box">
-          <div class="rate-label">⭐ HARUF RATE</div>
-          <div class="rate-value">${b.rate_haruf || '100 ka 950'}</div>
+        <div class="rate-box haruf-box">
+          <div class="rate-label">⭐ हरूफ रेट</div>
+          <div class="rate-value">➔ ${b.rate_haruf || '100 का 950'}</div>
         </div>
       </div>
 
-      ${b.timings ? `<div class="khaiwal-timings">⏰ ${b.timings}</div>` : ''}
+      <div class="khaiwal-beads">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
 
-      <div class="khaiwal-actions">
-        <a href="https://wa.me/${b.whatsapp || '919999999999'}?text=Hello" target="_blank" class="btn-khaiwal-wa">
-          💬 PLAY ON WHATSAPP
+      ${timingsHtml}
+
+      <div class="khaiwal-payment-info">
+        💰 पेमेंट लेन-देन <strong>ALL IN UPI</strong> (PhonePe / GPay / Paytm QR Code)
+      </div>
+
+      <div class="khaiwal-diamonds">
+        💎 💎 💎 💎 💎 💎 💎 💎
+      </div>
+
+      <div class="khaiwal-contact-display">
+        WhatsApp: <span>+${waNum}</span>
+      </div>
+
+      <div class="khaiwal-actions-dual">
+        <a href="${waUrl}" target="_blank" class="btn-khaiwal-wa">
+          <span class="btn-icon">💬</span> WHATSAPP पर खेलें
+        </a>
+        <a href="${tgUrl}" target="_blank" class="btn-khaiwal-tg">
+          <span class="btn-icon">📢</span> TELEGRAM
         </a>
       </div>
     `;

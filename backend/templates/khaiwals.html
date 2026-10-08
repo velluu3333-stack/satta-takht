@@ -145,9 +145,24 @@
           <label>GAME TIMINGS (LIST)</label>
           <input type="text" name="timings" value="{{ b['timings'] }}" placeholder="दिल्ली बाजार 03:00 PM | फरीदाबाद 06:00 PM | ..."/>
         </div>
-        <div class="form-group full">
-          <label>WHATSAPP NUMBER (with 91, e.g. 919876543210)</label>
+        <div class="form-group">
+          <label>💬 WHATSAPP NUMBER (with 91, e.g. 919876543210)</label>
           <input type="text" name="whatsapp" value="{{ b['whatsapp'] }}" placeholder="919876543210"/>
+        </div>
+        <div class="form-group">
+          <label>📢 TELEGRAM LINK (e.g. https://t.me/KhaiwalName)</label>
+          <input type="text" name="telegram" value="{{ b['telegram'] or '' }}" placeholder="https://t.me/ChannelName"/>
+        </div>
+        <div class="form-group full">
+          <label>🎨 BOARD COLOR / THEME</label>
+          <select name="board_theme" style="width:100%; padding:10px 12px; background:var(--dark); border:1.5px solid #2a2a2a; border-radius:8px; color:#fff; font-size:0.88rem;">
+            <option value="theme-blue" {{ 'selected' if b['board_theme'] == 'theme-blue' }}>🔵 Royal Deep Blue (Reference Style 1)</option>
+            <option value="theme-cream-gold" {{ 'selected' if b['board_theme'] == 'theme-cream-gold' }}>🌕 Ivory / Cream Royal Gold (Reference Style 2)</option>
+            <option value="theme-green" {{ 'selected' if b['board_theme'] == 'theme-green' }}>🟢 Emerald Casino Green</option>
+            <option value="theme-red" {{ 'selected' if b['board_theme'] == 'theme-red' }}>🔴 Crimson Blood Red</option>
+            <option value="theme-purple" {{ 'selected' if b['board_theme'] == 'theme-purple' }}>🟣 Regal Purple Velvet</option>
+            <option value="theme-dark" {{ 'selected' if b['board_theme'] == 'theme-dark' }}>⚫ Midnight Onyx Glow</option>
+          </select>
         </div>
       </div>
 

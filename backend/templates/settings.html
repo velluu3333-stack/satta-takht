@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-  <title>Chatbot & Links — Satta Takht</title>
+  <title>Settings, Themes & Leak Jodi — Satta Takht</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --orange: #FF8C00; --gold: #FFD700;
-      --dark: #0d0d0d; --dark2: #1a1a2e;
+      --dark: #0d0d0d; --dark2: #161622; --dark3: #1f1f2e;
       --green: #00c853; --red: #ff1744; --blue: #0288d1;
     }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--dark); color: #fff; padding-bottom: 30px; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--dark); color: #fff; padding-bottom: 40px; }
 
     /* ---- TOPBAR ---- */
     .topbar {
@@ -31,7 +31,7 @@
     .btn-back { background: rgba(255,140,0,.2); border: 1px solid var(--orange); color: var(--orange); }
 
     /* ---- MAIN ---- */
-    .main { padding: 14px; max-width: 650px; margin: 0 auto; }
+    .main { padding: 14px; max-width: 680px; margin: 0 auto; }
 
     .alert {
       border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;
@@ -40,43 +40,75 @@
     .alert-success { background: rgba(0,200,83,.12); border: 1px solid var(--green); color: #69f0ae; }
 
     .settings-card {
-      background: var(--dark2); border: 1.5px solid #2e86c1;
-      border-radius: 16px; padding: 22px 18px; margin-bottom: 20px;
+      background: var(--dark2); border: 1.5px solid #283747;
+      border-radius: 16px; padding: 20px 18px; margin-bottom: 22px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
+    .settings-card.theme-card-box { border-color: #f39c12; }
+    .settings-card.leak-card-box  { border-color: #e74c3c; }
+
     .settings-card-title {
       font-size: 1.05rem; font-weight: 800; color: #4fc3f7;
-      margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #283747;
+      margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #243342;
       display: flex; align-items: center; gap: 8px;
     }
+    .theme-card-box .settings-card-title { color: var(--gold); }
+    .leak-card-box .settings-card-title  { color: #ff5252; }
 
-    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     label { color: #aaa; font-size: 0.76rem; letter-spacing: 1px; font-weight: 700; }
-    input[type="text"] {
+    input[type="text"], textarea {
       width: 100%; padding: 12px 14px;
       background: var(--dark); border: 1.5px solid #283747;
-      border-radius: 10px; color: #fff; font-size: 0.95rem; outline: none;
+      border-radius: 10px; color: #fff; font-size: 0.92rem; outline: none;
       transition: border 0.2s;
     }
-    input:focus { border-color: #29b6f6; }
+    input:focus, textarea:focus { border-color: #29b6f6; }
     .hint { color: #888; font-size: 0.72rem; line-height: 1.4; }
 
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ---- THEME RADIO CARDS ---- */
+    .theme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .theme-option {
+      background: var(--dark3); border: 2px solid #333;
+      border-radius: 12px; padding: 12px; cursor: pointer;
+      display: flex; flex-direction: column; gap: 6px;
+      transition: all 0.2s;
+    }
+    .theme-option:hover { border-color: var(--gold); }
+    .theme-option.selected { border-color: var(--gold); background: rgba(255, 215, 0, 0.08); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
+    .theme-option input[type="radio"] { display: none; }
+    .theme-swatch {
+      height: 24px; border-radius: 6px; display: flex; overflow: hidden; margin-bottom: 4px;
+    }
+    .theme-swatch span { flex: 1; }
+    .theme-title { font-size: 0.82rem; font-weight: 700; color: #fff; }
+    .theme-desc { font-size: 0.68rem; color: #aaa; }
+
     .btn-save-settings {
-      width: 100%; padding: 13px; margin-top: 6px;
+      width: 100%; padding: 14px; margin-top: 10px;
       background: linear-gradient(135deg, #0288d1, #01579b);
       color: #fff; font-weight: 800; border: none;
-      border-radius: 10px; cursor: pointer; font-size: 0.95rem; letter-spacing: 1px;
-      transition: opacity 0.15s;
+      border-radius: 12px; cursor: pointer; font-size: 1rem; letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(2, 136, 209, 0.4);
+      transition: transform 0.1s, opacity 0.15s;
     }
-    .btn-save-settings:active { opacity: 0.85; }
+    .btn-save-settings:active { transform: scale(0.98); opacity: 0.9; }
 
     .preview-box {
       background: #0d0d12; border: 1px dashed #34495e; border-radius: 12px;
       padding: 14px; margin-top: 18px;
     }
     .preview-box h4 { color: var(--gold); font-size: 0.82rem; margin-bottom: 8px; }
-    .preview-item { font-size: 0.76rem; color: #bbb; margin-bottom: 4px; }
+    .preview-item { font-size: 0.76rem; color: #bbb; margin-bottom: 4px; word-break: break-all; }
     .preview-item span { color: #29b6f6; font-family: monospace; }
+
+    .checkbox-row {
+      display: flex; align-items: center; gap: 8px; margin: 8px 0 16px;
+      color: #ddd; font-size: 0.88rem; font-weight: 700;
+    }
+    .checkbox-row input { width: 20px; height: 20px; accent-color: #ff1744; cursor: pointer; }
 
     .footer-brand { text-align: center; padding: 20px 10px; color: #444; font-size: 0.72rem; letter-spacing: 2px; }
     .footer-brand span { color: var(--orange); }
@@ -88,7 +120,7 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-brand">
-      <div class="title">💬 CHATBOT & LINKS</div>
+      <div class="title">⚙️ SETTINGS & THEMES</div>
       <div class="sub">SATTA TAKHT · BY SAURAV</div>
     </div>
     <a href="/admin/panel" class="btn-sm btn-back">← Back</a>
@@ -101,46 +133,197 @@
   <div class="alert alert-success">{{ msg }}</div>
   {% endif %}
 
-  <div class="settings-card">
-    <div class="settings-card-title">
-      <span>⚙️ Chatbot & Contact Buttons Settings</span>
+  <form method="POST" action="/admin/settings">
+
+    <!-- 1. CHATBOT FLOATING BUTTONS (SEPARATE) -->
+    <div class="settings-card">
+      <div class="settings-card-title">
+        <span>🤖 1. Floating Chatbot Buttons (Bottom Screen)</span>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>📢 CHATBOT TELEGRAM LINK</label>
+          <input type="text" name="chatbot_telegram" value="{{ settings.get('chatbot_telegram', settings.get('telegram_link', 'https://t.me/')) }}" placeholder="https://t.me/ChatbotBot" required/>
+          <span class="hint">Left-side floating Telegram Chatbot button par yahi open hoga.</span>
+        </div>
+        <div class="form-group">
+          <label>💬 CHATBOT WHATSAPP NUMBER</label>
+          <input type="text" name="chatbot_whatsapp" value="{{ settings.get('chatbot_whatsapp', settings.get('whatsapp_number', '919999999999')) }}" placeholder="e.g. 919876543210" required/>
+          <span class="hint">Right-side floating WhatsApp Chatbot button par yahi open hoga.</span>
+        </div>
+      </div>
     </div>
 
-    <form method="POST" action="/admin/settings">
-      <div class="form-group">
-        <label>📢 TELEGRAM CHANNEL LINK / USERNAME</label>
-        <input type="text" name="telegram_link" value="{{ settings.get('telegram_link', 'https://t.me/') }}" placeholder="e.g. https://t.me/YourChannelName" required/>
-        <span class="hint">Website ke Left Side Floating Telegram button aur Telegram Cards par yahi link open hoga.</span>
+    <!-- 2. SUPPORT & COMMUNITY (SEPARATE) -->
+    <div class="settings-card">
+      <div class="settings-card-title">
+        <span>📞 2. Support Helpline & Official Community Cards</span>
       </div>
-
-      <div class="form-group">
-        <label>💬 WHATSAPP NUMBER (with 91 country code, no +)</label>
-        <input type="text" name="whatsapp_number" value="{{ settings.get('whatsapp_number', '919999999999') }}" placeholder="e.g. 919876543210" required/>
-        <span class="hint">Website ke Right Side Floating WhatsApp button aur Helpline Chat par yahi number open hoga.</span>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>📢 OFFICIAL TELEGRAM CHANNEL</label>
+          <input type="text" name="support_telegram" value="{{ settings.get('support_telegram', settings.get('telegram_link', 'https://t.me/')) }}" placeholder="https://t.me/OfficialChannel" required/>
+          <span class="hint">Neeche 'Official Telegram Channel' card par open hoga.</span>
+        </div>
+        <div class="form-group">
+          <label>💬 CUSTOMER SUPPORT WHATSAPP</label>
+          <input type="text" name="support_whatsapp" value="{{ settings.get('support_whatsapp', settings.get('whatsapp_number', '919999999999')) }}" placeholder="e.g. 919999999999" required/>
+          <span class="hint">Neeche 'WhatsApp Support' helpline card par open hoga.</span>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label>📲 APP DOWNLOAD / PLAY STORE LINK (OPTIONAL)</label>
-        <input type="text" name="app_download_link" value="{{ settings.get('app_download_link', '') }}" placeholder="e.g. https://play.google.com/store/apps/details?id=com.sattatakht or APK link"/>
-        <span class="hint">Website ke top par 'DOWNLOAD APK' button par ye link open hoga. Agar khali chhodoge toh browser ka auto-PWA install trigger hoga.</span>
-      </div>
-
-      <button type="submit" class="btn-save-settings">
-        💾 SAVE ALL SETTINGS
-      </button>
-    </form>
-
-    <div class="preview-box">
-      <h4>👀 Current Live Target Links:</h4>
-      <div class="preview-item">Telegram: <span>{{ settings.get('telegram_link', 'https://t.me/') }}</span></div>
-      <div class="preview-item">WhatsApp: <span>https://wa.me/{{ settings.get('whatsapp_number', '919999999999') }}</span></div>
-      <div class="preview-item">App Link: <span>{{ settings.get('app_download_link') or 'Default (Auto-PWA Browser Install)' }}</span></div>
     </div>
-  </div>
+
+    <!-- 3. APP DOWNLOAD LINK -->
+    <div class="settings-card">
+      <div class="settings-card-title">
+        <span>📲 3. Android App / Play Store Download Link</span>
+      </div>
+      <div class="form-group">
+        <label>APK / PLAY STORE URL (OPTIONAL)</label>
+        <input type="text" name="app_download_link" value="{{ settings.get('app_download_link', '') }}" placeholder="e.g. https://play.google.com/store/apps/details?id=com.sattatakht or direct APK link"/>
+        <span class="hint">Top par 'DOWNLOAD APK' button par open hoga. Khali chhodne par browser auto-PWA install chalega.</span>
+      </div>
+    </div>
+
+    <!-- 4. SITE-WIDE THEMES SELECTION (5-6 THEMES) -->
+    <div class="settings-card theme-card-box">
+      <div class="settings-card-title">
+        <span>🎨 4. Site-Wide Color Themes (Choose 1)</span>
+      </div>
+      <p class="hint" style="margin-bottom:12px;">Yahan se poori website ka theme aur color 1 click me badal sakte ho!</p>
+
+      {% set cur_theme = settings.get('site_theme', 'theme-classic-dark') %}
+      <div class="theme-grid">
+
+        <label class="theme-option {{ 'selected' if cur_theme == 'theme-classic-dark' }}">
+          <input type="radio" name="site_theme" value="theme-classic-dark" {{ 'checked' if cur_theme == 'theme-classic-dark' }} onchange="selectTheme(this)"/>
+          <div class="theme-swatch">
+            <span style="background:#0a0a0c;"></span>
+            <span style="background:#ff8c00;"></span>
+            <span style="background:#ffd700;"></span>
+          </div>
+          <span class="theme-title">👑 Classic Dark Gold</span>
+          <span class="theme-desc">Obsidian dark with royal gold & amber glow</span>
+        </label>
+
+        <label class="theme-option {{ 'selected' if cur_theme == 'theme-royal-blue' }}">
+          <input type="radio" name="site_theme" value="theme-royal-blue" {{ 'checked' if cur_theme == 'theme-royal-blue' }} onchange="selectTheme(this)"/>
+          <div class="theme-swatch">
+            <span style="background:#051329;"></span>
+            <span style="background:#0088cc;"></span>
+            <span style="background:#ffd700;"></span>
+          </div>
+          <span class="theme-title">🔵 Royal Blue Sapphire</span>
+          <span class="theme-desc">Deep casino navy blue with bright gold accents</span>
+        </label>
+
+        <label class="theme-option {{ 'selected' if cur_theme == 'theme-blood-red' }}">
+          <input type="radio" name="site_theme" value="theme-blood-red" {{ 'checked' if cur_theme == 'theme-blood-red' }} onchange="selectTheme(this)"/>
+          <div class="theme-swatch">
+            <span style="background:#140205;"></span>
+            <span style="background:#b71c1c;"></span>
+            <span style="background:#ffd700;"></span>
+          </div>
+          <span class="theme-title">🔴 Crimson Blood Red</span>
+          <span class="theme-desc">Aggressive gothic blood-red & carbon black</span>
+        </label>
+
+        <label class="theme-option {{ 'selected' if cur_theme == 'theme-emerald-green' }}">
+          <input type="radio" name="site_theme" value="theme-emerald-green" {{ 'checked' if cur_theme == 'theme-emerald-green' }} onchange="selectTheme(this)"/>
+          <div class="theme-swatch">
+            <span style="background:#02140a;"></span>
+            <span style="background:#00c853;"></span>
+            <span style="background:#ffd700;"></span>
+          </div>
+          <span class="theme-title">🟢 Emerald Casino Green</span>
+          <span class="theme-desc">Rich VIP casino emerald green & gold</span>
+        </label>
+
+        <label class="theme-option {{ 'selected' if cur_theme == 'theme-purple-gold' }}">
+          <input type="radio" name="site_theme" value="theme-purple-gold" {{ 'checked' if cur_theme == 'theme-purple-gold' }} onchange="selectTheme(this)"/>
+          <div class="theme-swatch">
+            <span style="background:#0e031a;"></span>
+            <span style="background:#7c4dff;"></span>
+            <span style="background:#f39c12;"></span>
+          </div>
+          <span class="theme-title">🟣 Regal Velvet Purple</span>
+          <span class="theme-desc">Royal violet and glowing neon amber</span>
+        </label>
+
+        <label class="theme-option {{ 'selected' if cur_theme == 'theme-golden-luxury' }}">
+          <input type="radio" name="site_theme" value="theme-golden-luxury" {{ 'checked' if cur_theme == 'theme-golden-luxury' }} onchange="selectTheme(this)"/>
+          <div class="theme-swatch">
+            <span style="background:#0d0c0a;"></span>
+            <span style="background:#b38f28;"></span>
+            <span style="background:#fff2a8;"></span>
+          </div>
+          <span class="theme-title">🏆 24K Pure Luxury Gold</span>
+          <span class="theme-desc">Deep metallic 24K gold & champagne contrast</span>
+        </label>
+
+      </div>
+    </div>
+
+    <!-- 5. VIP LEAK JODI BOARD (BELOW APK BOX) -->
+    <div class="settings-card leak-card-box">
+      <div class="settings-card-title">
+        <span>🔥 5. VIP Leak Jodi / Parcha Board (Below APK Box)</span>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="leak_act" name="leak_jodi_active" value="1" {{ 'checked' if settings.get('leak_jodi_active', '1') == '1' }}/>
+        <label for="leak_act" style="color:#ff6b6b; cursor:pointer;">Show VIP Leak Jodi Board on Website</label>
+      </div>
+
+      <div class="form-group">
+        <label>👑 BOARD HEADLINE / TITLE</label>
+        <input type="text" name="leak_jodi_title" value="{{ settings.get('leak_jodi_title', '👑 VIP LEAK JODI & SINGLE HARUF BLAST 👑') }}" placeholder="e.g. 👑 VIP LEAK JODI DIRECT COMPANY BLAST 👑"/>
+      </div>
+
+      <div class="form-group">
+        <label>⭐ TAGLINE / GUARANTEE</label>
+        <input type="text" name="leak_jodi_tagline" value="{{ settings.get('leak_jodi_tagline', '100% सॉलिड लीक गेम • सिंगल जोड़ी फिक्स • 100% लॉस कवर गारंटी') }}" placeholder="e.g. 100% सॉलिड लीक गेम • सिंगल जोड़ी फिक्स"/>
+      </div>
+
+      <div class="form-group">
+        <label>🎯 GAMES COVERED</label>
+        <input type="text" name="leak_jodi_games" value="{{ settings.get('leak_jodi_games', 'गली | दिसावर | फरीदाबाद | गाजियाबाद | दिल्ली बाजार') }}" placeholder="e.g. गली | दिसावर | फरीदाबाद | गाजियाबाद"/>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>💬 LEAK JODI WHATSAPP NUMBER</label>
+          <input type="text" name="leak_jodi_whatsapp" value="{{ settings.get('leak_jodi_whatsapp', '919999999999') }}" placeholder="919999999999"/>
+        </div>
+        <div class="form-group">
+          <label>📢 LEAK JODI TELEGRAM LINK</label>
+          <input type="text" name="leak_jodi_telegram" value="{{ settings.get('leak_jodi_telegram', 'https://t.me/') }}" placeholder="https://t.me/VIPLeakChannel"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>📢 PARCHA / BOOKING NOTICE (like Reference Image)</label>
+        <input type="text" name="leak_jodi_note" value="{{ settings.get('leak_jodi_note', 'खाईवाल का परचा लगवाने के लिए मैसेज करे / अपनी गेम का रिजल्ट डलवाने के लिए संपर्क करें') }}" placeholder="Notice text..."/>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-save-settings">
+      💾 SAVE ALL SETTINGS, THEMES & LEAK JODI
+    </button>
+  </form>
 
 </div>
 
 <div class="footer-brand">SATTA TAKHT &nbsp;•&nbsp; <span>BY SAURAV</span></div>
+
+<script>
+function selectTheme(radio) {
+  document.querySelectorAll('.theme-option').forEach(el => el.classList.remove('selected'));
+  if (radio.checked) {
+    radio.closest('.theme-option').classList.add('selected');
+  }
+}
+</script>
 
 </body>
 </html>

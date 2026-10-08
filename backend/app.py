@@ -80,18 +80,47 @@ def init_db():
             whatsapp TEXT DEFAULT '',
             calling TEXT DEFAULT '',
             is_active INTEGER DEFAULT 1,
-            badge TEXT DEFAULT ''
+            badge TEXT DEFAULT '',
+            telegram TEXT DEFAULT '',
+            board_theme TEXT DEFAULT 'theme-blue'
         )
     ''')
-    # Site settings (WhatsApp & Telegram Chatbot link)
+    # Auto migrate if existing columns are missing
+    try:
+        conn.execute("ALTER TABLE khaiwals ADD COLUMN telegram TEXT DEFAULT ''")
+    except Exception:
+        pass
+    try:
+        conn.execute("ALTER TABLE khaiwals ADD COLUMN board_theme TEXT DEFAULT 'theme-blue'")
+    except Exception:
+        pass
+
+    # Site settings (Chatbot, Support, Themes, Leak Jodi)
     conn.execute('''
         CREATE TABLE IF NOT EXISTS site_settings (
             key TEXT PRIMARY KEY,
             value TEXT NOT NULL
         )
     ''')
-    conn.execute("INSERT OR IGNORE INTO site_settings (key, value) VALUES ('telegram_link', 'https://t.me/')")
-    conn.execute("INSERT OR IGNORE INTO site_settings (key, value) VALUES ('whatsapp_number', '919999999999')")
+    default_settings_list = [
+        ('telegram_link', 'https://t.me/'),
+        ('whatsapp_number', '919999999999'),
+        ('chatbot_telegram', 'https://t.me/'),
+        ('chatbot_whatsapp', '919999999999'),
+        ('support_telegram', 'https://t.me/'),
+        ('support_whatsapp', '919999999999'),
+        ('app_download_link', ''),
+        ('site_theme', 'theme-classic-dark'),
+        ('leak_jodi_active', '1'),
+        ('leak_jodi_title', '👑 VIP LEAK JODI & SINGLE HARUF BLAST 👑'),
+        ('leak_jodi_tagline', '100% सॉलिड लीक गेम • सिंगल जोड़ी फिक्स • 100% लॉस कवर गारंटी'),
+        ('leak_jodi_games', 'गली | दिसावर | फरीदाबाद | गाजियाबाद | दिल्ली बाजार'),
+        ('leak_jodi_whatsapp', '919999999999'),
+        ('leak_jodi_telegram', 'https://t.me/'),
+        ('leak_jodi_note', 'खाईवाल का परचा लगवाने या सिंगल लीक गेम पाने के लिए तुरंत मैसेज करें')
+    ]
+    for k, v in default_settings_list:
+        conn.execute("INSERT OR IGNORE INTO site_settings (key, value) VALUES (?, ?)", (k, v))
 
     # Seed Default Cities (Comprehensive list from satta-king-fast.com)
     existing_cities = conn.execute('SELECT COUNT(*) as c FROM cities').fetchone()['c']
@@ -481,15 +510,17 @@ def admin_khaiwals():
         rate_haruf = request.form.get('rate_haruf', '').strip()
         whatsapp   = request.form.get('whatsapp', '').strip()
         calling    = request.form.get('calling', '').strip()
+        telegram   = request.form.get('telegram', '').strip()
+        board_theme = request.form.get('board_theme', 'theme-blue').strip()
         is_active  = 1 if request.form.get('is_active') else 0
 
         conn = get_db()
         conn.execute('''
             UPDATE khaiwals SET
                 name=?, badge=?, tagline=?, timings=?, rate_jodi=?, rate_haruf=?,
-                whatsapp=?, calling=?, is_active=?
+                whatsapp=?, calling=?, is_active=?, telegram=?, board_theme=?
             WHERE id=?
-        ''', (name, badge, tagline, timings, rate_jodi, rate_haruf, whatsapp, calling, is_active, kid))
+        ''', (name, badge, tagline, timings, rate_jodi, rate_haruf, whatsapp, calling, is_active, telegram, board_theme, kid))
         conn.commit()
         conn.close()
         return redirect(url_for('admin_khaiwals') + f'?msg=✅+Board+{kid}+updated+successfully!')
@@ -498,7 +529,7 @@ def admin_khaiwals():
     return render_template('khaiwals.html', khaiwals=khaiwals, msg=msg)
 
 # ============================================================
-# ADMIN — CHATBOT & LINKS SETTINGS
+# ADMIN — CHATBOT, THEMES & LEAK JODI SETTINGS
 # ============================================================
 
 @app.route('/admin/settings', methods=['GET', 'POST'])
@@ -509,15 +540,51 @@ def admin_settings():
     msg = request.args.get('msg', '')
     conn = get_db()
     if request.method == 'POST':
-        tg  = request.form.get('telegram_link', '').strip()
-        wa  = request.form.get('whatsapp_number', '').strip()
+        # 1. Chatbot & Fast Action links
+        cb_tg = request.form.get('chatbot_telegram', '').strip()
+        cb_wa = request.form.get('chatbot_whatsapp', '').strip()
+        
+        # 2. Support Helpline & Community links
+        sp_tg = request.form.get('support_telegram', '').strip()
+        sp_wa = request.form.get('support_whatsapp', '').strip()
+        
+        # 3. App download link
         apk = request.form.get('app_download_link', '').strip()
-        if tg: conn.execute("INSERT OR REPLACE INTO site_settings (key, value) VALUES ('telegram_link', ?)", (tg,))
-        if wa: conn.execute("INSERT OR REPLACE INTO site_settings (key, value) VALUES ('whatsapp_number', ?)", (wa,))
-        conn.execute("INSERT OR REPLACE INTO site_settings (key, value) VALUES ('app_download_link', ?)", (apk,))
+
+        # 4. Site-wide theme
+        site_theme = request.form.get('site_theme', 'theme-classic-dark').strip()
+
+        # 5. Leak Jodi Section
+        leak_active = '1' if request.form.get('leak_jodi_active') else '0'
+        leak_title = request.form.get('leak_jodi_title', '').strip()
+        leak_tagline = request.form.get('leak_jodi_tagline', '').strip()
+        leak_games = request.form.get('leak_jodi_games', '').strip()
+        leak_wa = request.form.get('leak_jodi_whatsapp', '').strip()
+        leak_tg = request.form.get('leak_jodi_telegram', '').strip()
+        leak_note = request.form.get('leak_jodi_note', '').strip()
+
+        settings_to_save = {
+            'chatbot_telegram': cb_tg,
+            'chatbot_whatsapp': cb_wa,
+            'support_telegram': sp_tg,
+            'support_whatsapp': sp_wa,
+            'telegram_link': sp_tg or cb_tg,      # backwards compat
+            'whatsapp_number': sp_wa or cb_wa,    # backwards compat
+            'app_download_link': apk,
+            'site_theme': site_theme,
+            'leak_jodi_active': leak_active,
+            'leak_jodi_title': leak_title,
+            'leak_jodi_tagline': leak_tagline,
+            'leak_jodi_games': leak_games,
+            'leak_jodi_whatsapp': leak_wa,
+            'leak_jodi_telegram': leak_tg,
+            'leak_jodi_note': leak_note
+        }
+        for k, v in settings_to_save.items():
+            conn.execute("INSERT OR REPLACE INTO site_settings (key, value) VALUES (?, ?)", (k, v))
         conn.commit()
         conn.close()
-        return redirect(url_for('admin_settings') + '?msg=✅+Settings+updated+successfully!')
+        return redirect(url_for('admin_settings') + '?msg=✅+All+Settings+and+Themes+updated+successfully!')
 
     settings_rows = conn.execute('SELECT key, value FROM site_settings').fetchall()
     settings = {r['key']: r['value'] for r in settings_rows}

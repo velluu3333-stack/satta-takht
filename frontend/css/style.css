@@ -200,6 +200,125 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 2px 5px rgba(0, 200, 83, 0.35);
 }
 
+/* ===== 2.2 VIP LEAK JODI & PARCHA BOARD ===== */
+.leak-jodi-board {
+  max-width: 540px;
+  width: calc(100% - 24px);
+  margin: 8px auto 10px;
+  background: linear-gradient(135deg, #1f0508 0%, #3a080d 50%, #150204 100%);
+  border: 1.5px solid #ff1744;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 0 16px rgba(255, 23, 68, 0.4), 0 4px 12px rgba(0,0,0,0.5);
+  animation: leak-pulse 2.2s infinite ease-in-out;
+}
+
+@keyframes leak-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(255, 23, 68, 0.35), 0 4px 12px rgba(0,0,0,0.4);
+    border-color: #ff1744;
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(255, 23, 68, 0.75), 0 0 35px rgba(255, 215, 0, 0.4);
+    border-color: #ffd700;
+  }
+}
+
+.leak-jodi-inner {
+  text-align: center;
+}
+
+.leak-jodi-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #ff1744, #d50000);
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 900;
+  padding: 2px 10px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.leak-jodi-title {
+  color: #ffd700;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 3px;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.leak-jodi-tagline {
+  color: #ffcdd2;
+  font-size: 0.74rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.leak-jodi-games-badge {
+  background: rgba(0,0,0,0.45);
+  border: 1px dashed #ffd700;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.leak-jodi-note {
+  color: #ffe082;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  background: rgba(255, 140, 0, 0.12);
+  padding: 5px 8px;
+  border-radius: 6px;
+}
+
+.leak-jodi-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.btn-leak-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 9px 8px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 200, 83, 0.35);
+  transition: transform 0.12s;
+}
+
+.btn-leak-tg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #0088cc, #005580);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 9px 8px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 136, 204, 0.35);
+  transition: transform 0.12s;
+}
+
+.btn-leak-wa:active, .btn-leak-tg:active {
+  transform: scale(0.96);
+}
+
 /* ===== 3. STATS BAR (USERS ONLINE + DATE) ===== */
 .stats-bar {
   background: #111115;
@@ -559,105 +678,255 @@ a { text-decoration: none; color: inherit; }
 .khaiwal-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
+/* Base Khaiwal Board Card */
 .khaiwal-board-card {
-  background: #141319;
-  border: 1.5px solid #2d2618;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 16px 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
   position: relative;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* --- THEME 1: ROYAL DEEP BLUE (Reference Image 1) --- */
+.khaiwal-board-card.theme-blue {
+  background: linear-gradient(180deg, #021235 0%, #031b4e 50%, #010d26 100%);
+  border-color: #00e5ff;
+  box-shadow: 0 0 18px rgba(0, 180, 255, 0.35), 0 6px 20px rgba(0,0,0,0.5);
+  color: #fff;
+}
+.khaiwal-board-card.theme-blue .khaiwal-name { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+.khaiwal-board-card.theme-blue .khaiwal-rates { background: rgba(0, 0, 0, 0.5); border: 1.5px solid #0288d1; }
+.khaiwal-board-card.theme-blue .rate-box .rate-label { color: #4fc3f7; }
+.khaiwal-board-card.theme-blue .rate-box .rate-value { color: #fff; }
+.khaiwal-board-card.theme-blue .timing-chip { background: #072663; border: 1px solid #0d47a1; color: #fff; }
+
+/* --- THEME 2: IVORY / CREAM GOLD ROYAL (Reference Image 2) --- */
+.khaiwal-board-card.theme-cream-gold {
+  background: linear-gradient(180deg, #fffaeb 0%, #fef5d9 100%);
+  border-color: #d4af37;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.4), 0 4px 15px rgba(0,0,0,0.25);
+  color: #2c1a06;
+}
+.khaiwal-board-card.theme-cream-gold .khaiwal-name { color: #800000; font-weight: 900; }
+.khaiwal-board-card.theme-cream-gold .khaiwal-tagline { color: #6d4c13; }
+.khaiwal-board-card.theme-cream-gold .khaiwal-rates { background: #fff; border: 1.5px solid #d4af37; }
+.khaiwal-board-card.theme-cream-gold .rate-box .rate-label { color: #6a1b9a; }
+.khaiwal-board-card.theme-cream-gold .rate-box .rate-value { color: #800000; font-weight: 900; }
+.khaiwal-board-card.theme-cream-gold .timing-chip { background: #fff; border: 1px solid #e0c878; color: #333; }
+.khaiwal-board-card.theme-cream-gold .khaiwal-payment-info { color: #800000; }
+.khaiwal-board-card.theme-cream-gold .khaiwal-contact-display { color: #444; }
+
+/* --- THEME 3: EMERALD CASINO GREEN --- */
+.khaiwal-board-card.theme-green {
+  background: linear-gradient(180deg, #022413 0%, #054525 50%, #01190d 100%);
+  border-color: #00e676;
+  box-shadow: 0 0 18px rgba(0, 230, 118, 0.35), 0 6px 20px rgba(0,0,0,0.5);
+  color: #fff;
+}
+.khaiwal-board-card.theme-green .khaiwal-name { color: #ffd700; }
+.khaiwal-board-card.theme-green .khaiwal-rates { background: rgba(0, 0, 0, 0.5); border: 1.5px solid #00c853; }
+.khaiwal-board-card.theme-green .timing-chip { background: #07381d; border: 1px solid #0b6133; color: #fff; }
+
+/* --- THEME 4: CRIMSON BLOOD RED --- */
+.khaiwal-board-card.theme-red {
+  background: linear-gradient(180deg, #260408 0%, #4a0910 50%, #170204 100%);
+  border-color: #ff1744;
+  box-shadow: 0 0 18px rgba(255, 23, 68, 0.4), 0 6px 20px rgba(0,0,0,0.5);
+  color: #fff;
+}
+.khaiwal-board-card.theme-red .khaiwal-name { color: #ffd700; }
+.khaiwal-board-card.theme-red .khaiwal-rates { background: rgba(0, 0, 0, 0.5); border: 1.5px solid #d50000; }
+.khaiwal-board-card.theme-red .timing-chip { background: #3d070d; border: 1px solid #630c16; color: #fff; }
+
+/* --- THEME 5: REGAL VELVET PURPLE --- */
+.khaiwal-board-card.theme-purple {
+  background: linear-gradient(180deg, #160426 0%, #300952 50%, #0e021a 100%);
+  border-color: #bb86fc;
+  box-shadow: 0 0 18px rgba(187, 134, 252, 0.35), 0 6px 20px rgba(0,0,0,0.5);
+  color: #fff;
+}
+.khaiwal-board-card.theme-purple .khaiwal-name { color: #ffd700; }
+.khaiwal-board-card.theme-purple .khaiwal-rates { background: rgba(0, 0, 0, 0.5); border: 1.5px solid #7c4dff; }
+.khaiwal-board-card.theme-purple .timing-chip { background: #260742; border: 1px solid #4a157a; color: #fff; }
+
+/* --- THEME 6: MIDNIGHT ONYX DARK --- */
+.khaiwal-board-card.theme-dark {
+  background: linear-gradient(180deg, #101014 0%, #1a1a24 50%, #0b0b0e 100%);
+  border-color: #ffd700;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.25), 0 6px 20px rgba(0,0,0,0.6);
+  color: #fff;
+}
+.khaiwal-board-card.theme-dark .khaiwal-name { color: #ffd700; }
+.khaiwal-board-card.theme-dark .khaiwal-rates { background: #0d0d12; border: 1.5px solid #333; }
+.khaiwal-board-card.theme-dark .timing-chip { background: #14141e; border: 1px solid #28283c; color: #fff; }
+
+/* Card Internals */
+.khaiwal-header {
+  margin-bottom: 10px;
 }
 
 .khaiwal-badge {
   display: inline-block;
-  background: var(--amber);
-  color: #000;
+  background: #ff1744;
+  color: #fff;
   font-size: 0.64rem;
   font-weight: 900;
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
   letter-spacing: 1px;
   margin-bottom: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .khaiwal-name {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 2px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
 }
 
 .khaiwal-tagline {
-  font-size: 0.72rem;
-  color: #a8a8b4;
-  margin-bottom: 10px;
+  font-size: 0.74rem;
+  color: #d1d1de;
   font-weight: 600;
 }
 
 .khaiwal-rates {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  background: #0d0c10;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #22202c;
-  margin-bottom: 10px;
-}
-
-.rate-box {
-  text-align: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
 }
 
 .rate-box .rate-label {
-  font-size: 0.62rem;
-  color: #888;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 2px;
 }
 
 .rate-box .rate-value {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: var(--green-live);
+  font-size: 0.96rem;
+  font-weight: 900;
 }
 
-.khaiwal-timings {
-  font-size: 0.68rem;
-  color: #c7c7d0;
-  line-height: 1.4;
+/* Red Beads Separator */
+.khaiwal-beads {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 8px 0;
+}
+.khaiwal-beads span {
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle at 3px 3px, #ff5252, #b71c1c);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 23, 68, 0.7);
+  display: inline-block;
+}
+
+/* Timings Chips Grid */
+.khaiwal-timing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.timing-chip {
   padding: 6px 8px;
-  background: rgba(255, 140, 0, 0.05);
   border-radius: 6px;
-  margin-bottom: 10px;
-  font-weight: 500;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
-.khaiwal-actions {
-  display: block;
+.khaiwal-timings-line {
+  font-size: 0.74rem;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.3);
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.khaiwal-payment-info {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin: 8px 0 4px;
+}
+
+.khaiwal-diamonds {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  margin: 4px 0 6px;
+}
+
+.khaiwal-contact-display {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+.khaiwal-contact-display span {
+  color: #ffd700;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+/* Dual Actions: WhatsApp + Telegram side-by-side */
+.khaiwal-actions-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .btn-khaiwal-wa {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #25D366, #128C7E);
+  gap: 6px;
+  background: linear-gradient(135deg, #00c853, #009624);
   color: #fff;
-  font-size: 0.92rem;
-  font-weight: 800;
-  padding: 12px 14px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  padding: 11px 8px;
   border-radius: 10px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  width: 100%;
-  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
-  transition: transform 0.15s;
+  box-shadow: 0 4px 12px rgba(0, 200, 83, 0.35);
+  transition: transform 0.12s;
+  letter-spacing: 0.5px;
 }
 
-.btn-khaiwal-wa:active {
-  transform: scale(0.98);
+.btn-khaiwal-tg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #0088cc, #005580);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  padding: 11px 8px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.35);
+  transition: transform 0.12s;
+  letter-spacing: 0.5px;
+}
+
+.btn-khaiwal-wa:active, .btn-khaiwal-tg:active {
+  transform: scale(0.96);
 }
 
 /* ===== 10. RECORD CHART TABLE ===== */
@@ -845,4 +1114,114 @@ a { text-decoration: none; color: inherit; }
 
 .fab-wa {
   background: var(--green-wa);
+}
+
+/* ===== 14. SITE-WIDE THEMES (6 THEMES) ===== */
+/* Theme 1: Default Classic Dark Gold */
+body.theme-classic-dark {
+  --bg-dark: #0a0a0c;
+  --bg-card: #141419;
+  --border-subtle: #242430;
+  --gold: #FFD700;
+  --amber: #FF8C00;
+}
+
+/* Theme 2: Royal Blue Sapphire */
+body.theme-royal-blue {
+  --bg-dark: #051329;
+  --bg-card: #092042;
+  --border-subtle: #143a75;
+  --gold: #ffd700;
+  --amber: #00b4d8;
+}
+body.theme-royal-blue .site-header {
+  background: linear-gradient(180deg, #020c1c 0%, #061c3b 100%);
+  border-bottom-color: #00b4d8;
+}
+body.theme-royal-blue .top-marquee {
+  background: linear-gradient(90deg, #003060, #005088, #003060);
+}
+body.theme-royal-blue .section-heading {
+  background: linear-gradient(90deg, #092042, #051329);
+  border-left-color: #00b4d8;
+}
+
+/* Theme 3: Crimson Blood Red */
+body.theme-blood-red {
+  --bg-dark: #120204;
+  --bg-card: #200407;
+  --border-subtle: #42080f;
+  --gold: #ffd700;
+  --amber: #ff1744;
+}
+body.theme-blood-red .site-header {
+  background: linear-gradient(180deg, #1c0205 0%, #30050a 100%);
+  border-bottom-color: #ff1744;
+}
+body.theme-blood-red .top-marquee {
+  background: linear-gradient(90deg, #59000a, #800010, #59000a);
+}
+body.theme-blood-red .section-heading {
+  background: linear-gradient(90deg, #2e0509, #120204);
+  border-left-color: #ff1744;
+}
+
+/* Theme 4: Emerald Casino Green */
+body.theme-emerald-green {
+  --bg-dark: #02140a;
+  --bg-card: #062614;
+  --border-subtle: #0d4a27;
+  --gold: #ffd700;
+  --amber: #00e676;
+}
+body.theme-emerald-green .site-header {
+  background: linear-gradient(180deg, #011207 0%, #08331b 100%);
+  border-bottom-color: #00e676;
+}
+body.theme-emerald-green .top-marquee {
+  background: linear-gradient(90deg, #023819, #055928, #023819);
+}
+body.theme-emerald-green .section-heading {
+  background: linear-gradient(90deg, #072b16, #02140a);
+  border-left-color: #00e676;
+}
+
+/* Theme 5: Regal Velvet Purple */
+body.theme-purple-gold {
+  --bg-dark: #0c0217;
+  --bg-card: #18052e;
+  --border-subtle: #380d6b;
+  --gold: #ffd700;
+  --amber: #bb86fc;
+}
+body.theme-purple-gold .site-header {
+  background: linear-gradient(180deg, #120324 0%, #26074a 100%);
+  border-bottom-color: #bb86fc;
+}
+body.theme-purple-gold .top-marquee {
+  background: linear-gradient(90deg, #2b0452, #490a8a, #2b0452);
+}
+body.theme-purple-gold .section-heading {
+  background: linear-gradient(90deg, #230840, #0c0217);
+  border-left-color: #bb86fc;
+}
+
+/* Theme 6: 24K Pure Luxury Gold */
+body.theme-golden-luxury {
+  --bg-dark: #0d0c09;
+  --bg-card: #1c1912;
+  --border-subtle: #453c24;
+  --gold: #ffd700;
+  --amber: #e6b800;
+}
+body.theme-golden-luxury .site-header {
+  background: linear-gradient(180deg, #17140b 0%, #2e2814 100%);
+  border-bottom-color: #ffd700;
+}
+body.theme-golden-luxury .top-marquee {
+  background: linear-gradient(90deg, #473a0c, #735e14, #473a0c);
+}
+body.theme-golden-luxury .section-heading {
+  background: linear-gradient(90deg, #2b2510, #0d0c09);
+  border-left-color: #ffd700;
 }
